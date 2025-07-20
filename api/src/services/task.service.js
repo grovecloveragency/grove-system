@@ -40,6 +40,9 @@ export const readAllActiveTasks = async (usersId) => {
       usersId,
       status: Status.ACTIVE,
     },
+    include: {
+      users: true,
+    },
   });
 };
 
@@ -49,6 +52,9 @@ export const readAllFailedTasks = async (usersId) => {
       usersId,
       status: Status.FAILED,
     },
+    include: {
+      users: true,
+    },
   });
 };
 
@@ -57,6 +63,9 @@ export const readAllCompletedTasks = async (usersId) => {
     where: {
       usersId,
       status: Status.COMPLETED,
+    },
+    include: {
+      users: true,
     },
   });
 };
