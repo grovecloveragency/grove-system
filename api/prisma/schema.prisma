@@ -37,10 +37,11 @@ model tasks {
 }
 
 model notifications {
-  id          String   @id @default(cuid())
-  title       String
-  description String
-  createdAt   DateTime @default(now())
+  id        String   @id @default(cuid())
+  title     String
+  message   String
+  createdAt DateTime @default(now())
+  isRead    Boolean  @default(false)
 
   users   users?  @relation(fields: [usersId], references: [id])
   usersId String?
