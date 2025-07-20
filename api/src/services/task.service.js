@@ -2,7 +2,13 @@ import { prisma } from "../lib/db.js";
 import { Status } from "@prisma/client";
 import { createNotification } from "../services/notification.service.js";
 
-export const createTask = async (title, description, deadline, usersId) => {
+export const createTask = async (
+  title,
+  description,
+  deadline,
+  priority,
+  usersId
+) => {
   const existingTask = await prisma.tasks.findUnique({
     where: {
       title,
@@ -18,14 +24,12 @@ export const createTask = async (title, description, deadline, usersId) => {
       title,
       description,
       deadline,
+      priority,
       usersId,
     },
   });
 
-  await createNotification({
-    title,
-    message: `Task created`,
-  });
+  await createNotification(title, `Task created`, usersId);
 
   return task;
 };

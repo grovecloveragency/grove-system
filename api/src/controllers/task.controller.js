@@ -1,9 +1,9 @@
 import * as taskServices from "../services/task.service.js";
 
 export const createTaskController = async (req, res) => {
-  const { title, description, deadline, usersId } = req.body;
+  const { title, description, deadline, priority, usersId } = req.body;
 
-  if (!title || !description || !deadline || !usersId) {
+  if (!title || !description || !deadline || !priority || !usersId) {
     res
       .status(404)
       .json({ success: false, message: "All fields are required" });
@@ -14,6 +14,7 @@ export const createTaskController = async (req, res) => {
       title,
       description,
       deadline,
+      priority,
       usersId
     );
 
