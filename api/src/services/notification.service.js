@@ -10,11 +10,30 @@ export const createNotification = async (title, message, usersId) => {
   });
 };
 
-export const readNotifications = async (usersId) => {
+export const getAllNotifications = async (usersId) => {
   return await prisma.notifications.findMany({
     where: {
       usersId,
       isRead: false,
+    },
+  });
+};
+
+export const readNotification = async (notificationId) => {
+  return await prisma.notifications.update({
+    where: {
+      id: notificationId,
+    },
+    data: {
+      isRead: true,
+    },
+  });
+};
+
+export const deleteNotification = async (notificationId) => {
+  return await prisma.notifications.delete({
+    where: {
+      id: notificationId,
     },
   });
 };
