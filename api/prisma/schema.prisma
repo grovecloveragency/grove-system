@@ -18,4 +18,42 @@ model users {
   name      String
   email     String   @unique
   createdAt DateTime @default(now())
+
+  tasks         tasks[]
+  notifications notifications[]
+}
+
+model tasks {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String
+  priority    Priority
+  deadline    DateTime
+  status      Status   @default(ACTIVE)
+  createdAt   DateTime @default(now())
+
+  users   users?  @relation(fields: [usersId], references: [id])
+  usersId String?
+}
+
+model notifications {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+
+  users   users?  @relation(fields: [usersId], references: [id])
+  usersId String?
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Status {
+  FAILED
+  ACTIVE
+  COMPLETED
 }
