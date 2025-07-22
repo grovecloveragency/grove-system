@@ -1,7 +1,7 @@
 import * as notificationServices from "../services/notification.service.js";
 
 export const getAllNotificationsController = async (req, res) => {
-  const usersId = req.params;
+  const { usersId } = req.params;
 
   if (!usersId) {
     res
@@ -24,7 +24,7 @@ export const getAllNotificationsController = async (req, res) => {
 };
 
 export const readNotificationsController = async (req, res) => {
-  const notificationId = req.params;
+  const { notificationId } = req.params;
 
   if (!notificationId) {
     res.status(404).json({
@@ -48,7 +48,7 @@ export const readNotificationsController = async (req, res) => {
 };
 
 export const deleteNotificationController = async (req, res) => {
-  const notificationId = req.params;
+  const { notificationId } = req.params;
 
   if (!notificationId) {
     res.status(404).json({
