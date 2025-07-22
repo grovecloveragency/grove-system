@@ -7,7 +7,7 @@ import {
   readAllCompletedTasks,
   completeTask,
   deleteTask,
-} from "../services/task.service.js";
+} from "../../services/task.service.js";
 
 // Mock the prisma client and the Status enum
 // We need to mock the entire 'db.js' module because 'prisma' is imported from it.
