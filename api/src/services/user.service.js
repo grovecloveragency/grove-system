@@ -1,6 +1,6 @@
 import { prisma } from "../lib/db.js";
 
-export const createUser = async (name, email) => {
+export const createUser = async (name, email, profilePic) => {
   const existingUser = await prisma.users.findUnique({
     where: {
       email,
@@ -15,6 +15,7 @@ export const createUser = async (name, email) => {
     data: {
       name,
       email,
+      profilePic,
     },
   });
 };

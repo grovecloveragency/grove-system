@@ -1,7 +1,7 @@
 import * as userServices from "../services/user.service.js";
 
 export const createUserController = async (req, res) => {
-  const { name, email } = req.body;
+  const { name, email, profilePic } = req.body;
 
   if (!email || !name) {
     res
@@ -10,7 +10,7 @@ export const createUserController = async (req, res) => {
   }
 
   try {
-    const user = await userServices.createUser(name, email);
+    const user = await userServices.createUser(name, email, profilePic);
     res.status(201).json({ success: true, data: user });
   } catch (error) {
     res.status(500).json({ success: false, message: error });
