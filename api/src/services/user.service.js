@@ -19,6 +19,27 @@ export const createUser = async (name, email) => {
   });
 };
 
+export const editUser = async (email, name) => {
+  const existingUser = await prisma.users.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (!existingUser) {
+    throw new Error("User does not exists");
+  }
+
+  return await prisma.users.update({
+    where: {
+      email,
+    },
+    data: {
+      name,
+    },
+  });
+};
+
 export const deleteUser = async (email) => {
   const existingUser = await prisma.users.findUnique({
     where: {
@@ -35,4 +56,18 @@ export const deleteUser = async (email) => {
       email,
     },
   });
+};
+
+export const getUser = async (email) => {
+  const user = await prisma.users.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User does not exists");
+  }
+
+  return user;
 };
