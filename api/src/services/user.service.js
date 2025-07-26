@@ -1,6 +1,6 @@
 import { prisma } from "../lib/db.js";
 
-export const createUser = async (name, email) => {
+export const createUser = async (name, email, profilePic) => {
   const existingUser = await prisma.users.findUnique({
     where: {
       email,
@@ -15,6 +15,28 @@ export const createUser = async (name, email) => {
     data: {
       name,
       email,
+      profilePic,
+    },
+  });
+};
+
+export const editUser = async (email, name) => {
+  const existingUser = await prisma.users.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (!existingUser) {
+    throw new Error("User does not exists");
+  }
+
+  return await prisma.users.update({
+    where: {
+      email,
+    },
+    data: {
+      name,
     },
   });
 };
@@ -35,4 +57,18 @@ export const deleteUser = async (email) => {
       email,
     },
   });
+};
+
+export const getUser = async (email) => {
+  const user = await prisma.users.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User does not exists");
+  }
+
+  return user;
 };

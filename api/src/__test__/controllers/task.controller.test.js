@@ -7,7 +7,7 @@ import {
   readAllFailedTasksController,
   completeTaskController,
   deleteTaskController,
-} from "../controllers/task.controller.js";
+} from "../../controllers/task.controller.js";
 
 // Mock the entire task.service.js module
 const mockTaskServices = {
